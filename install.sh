@@ -12,9 +12,9 @@ DOWNLOAD_URL="https://raw.githubusercontent.com/rafaelhschuh/samba-4-scipts/refs
 # Diretório de instalação (oculto na home do usuário)
 INSTALL_DIR="$HOME/.samba-scripts"
 # Nome do arquivo zip
-ZIP_FILE="samba-scripts.zip"
+ZIP_FILE="samba-manager.zip"
 # Nome do script lançador
-LAUNCHER_NAME="samba-script"
+LAUNCHER_NAME="samba-manager"
 # Caminho completo do lançador
 LAUNCHER_PATH="/usr/local/bin/$LAUNCHER_NAME"
 # --- Fim da Configuração --- #
@@ -90,19 +90,15 @@ if [ $? -ne 0 ]; then
 fi
 
 # Verificar se o script principal existe após extração (ajuste o caminho se necessário)
-MAIN_SCRIPT_PATH="$INSTALL_DIR/samba_scripts/samba_manager.sh"
+MAIN_SCRIPT_PATH="$INSTALL_DIR/samba_manager/samba_manager.sh"
 if [ ! -f "$MAIN_SCRIPT_PATH" ]; then
     # Tentar encontrar em um subdiretório comum se a estrutura do zip variar
-    if [ -d "$INSTALL_DIR/samba_manager_scripts" ] && [ -f "$INSTALL_DIR/samba_manager_scripts/samba_manager.sh" ]; then
-        MAIN_SCRIPT_PATH="$INSTALL_DIR/samba_manager_scripts/samba_manager.sh"
-    elif [ -d "$INSTALL_DIR/samba_manager_multilingual" ] && [ -f "$INSTALL_DIR/samba_manager_multilingual/samba_scripts/samba_manager.sh" ]; then
-         MAIN_SCRIPT_PATH="$INSTALL_DIR/samba_manager_multilingual/samba_scripts/samba_manager.sh"
-    elif [ -d "$INSTALL_DIR/samba_manager_fix_deps" ] && [ -f "$INSTALL_DIR/samba_manager_fix_deps/samba_scripts/samba_manager.sh" ]; then
-         MAIN_SCRIPT_PATH="$INSTALL_DIR/samba_manager_fix_deps/samba_scripts/samba_manager.sh"
+    if [ -d "$INSTALL_DIR/samba_manager" ] && [ -f "$INSTALL_DIR/samba_manager/samba_manager.sh" ]; then
+        MAIN_SCRIPT_PATH="$INSTALL_DIR/samba_manager/samba_manager.sh"
     else
        aviso "Não foi possível encontrar o script principal 'samba_manager.sh' dentro do diretório esperado após a extração. O lançador pode não funcionar."
        # Definir um caminho padrão mesmo assim, pode ser ajustado manualmente
-       MAIN_SCRIPT_PATH="$INSTALL_DIR/samba_scripts/samba_manager.sh"
+       MAIN_SCRIPT_PATH="$INSTALL_DIR/samba_manager/samba_manager.sh"
     fi
 fi
 
